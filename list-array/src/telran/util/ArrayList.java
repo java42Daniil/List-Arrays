@@ -30,8 +30,18 @@ public class ArrayList<T> implements List<T> {
 	}
 	@Override
 	public boolean add(int index, T element) {
-		// TODO Auto-generated method stub
-		return false;
+		if (index < 0 || index > size) {
+			return false;
+		}
+		if (size == array.length) {
+			add(element);
+			return true;
+		}
+	System.arraycopy(array, index, array, index+1, size-index);
+		size++;
+		array[index]=element;
+		
+		return true;
 	}
 
 	@Override
@@ -52,8 +62,18 @@ public class ArrayList<T> implements List<T> {
 	}
 	@Override
 	public T remove(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		T res = get(index);
+		if(res == null && index == size-1) {
+			array[index] = null;
+			size--;
+			return res;
+		}
+		for(int i=index; i<size;i++)
+		{
+		array[i]=array[i+1];
+		}
+		size--;
+		return res;
 	}
 
 }
