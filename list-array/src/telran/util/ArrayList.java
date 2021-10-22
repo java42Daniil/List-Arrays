@@ -37,6 +37,7 @@ public class ArrayList<T> implements List<T> {
 			add(element);
 			return true;
 		}
+		//[YG] major bug, You don't check size for the allocation need
 	System.arraycopy(array, index, array, index+1, size-index);
 		size++;
 		array[index]=element;
@@ -63,11 +64,13 @@ public class ArrayList<T> implements List<T> {
 	@Override
 	public T remove(int index) {
 		T res = get(index);
+		//[YG] cosmetic bug, the condition of the following "if" is never true, so 69 - 71 will never run
 		if(res == null && index == size-1) {
 			array[index] = null;
 			size--;
 			return res;
 		}
+		//[YG] better to apply arraycopy method. Your code has major bug for case size == length (the last iteration: array[i+1] out of array, as i+1 == array.length)
 		for(int i=index; i<size;i++)
 		{
 		array[i]=array[i+1];
