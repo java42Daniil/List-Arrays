@@ -34,6 +34,10 @@ public class ArrayList<T> implements List<T> {
 			return false;
 		}
 		if (size == array.length) {
+			// V.R. It isn't right. The array is fully filled anr 
+			// it is necessary to allocate memory.
+			// So instead of following 2 strings we need the single string.
+			// allocate();
 			add(element);
 			return true;
 		}
@@ -62,6 +66,18 @@ public class ArrayList<T> implements List<T> {
 	}
 	@Override
 	public T remove(int index) {
+		// V.R. It is incorrect implementation. The following is much better:
+		/*
+		if (!isValidIndex(index)) {
+			return null;
+		}
+		T resValue = array[index];
+		System.arraycopy(array, index+1, array, index, size-index-1);
+		// V.R. size--;
+		size = size-1;
+		return resValue;
+		 */
+		
 		T res = get(index);
 		if(res == null && index == size-1) {
 			array[index] = null;
