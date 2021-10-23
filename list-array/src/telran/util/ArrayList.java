@@ -34,6 +34,7 @@ public class ArrayList<T> implements List<T> {
 			return false;
 		}
 		if (size == array.length) {
+			allocate();
 			add(element);
 			return true;
 		}
@@ -62,18 +63,25 @@ public class ArrayList<T> implements List<T> {
 	}
 	@Override
 	public T remove(int index) {
-		T res = get(index);
-		if(res == null && index == size-1) {
-			array[index] = null;
-			size--;
-			return res;
+		if (!isValidIndex(index)) {
+			return null;
 		}
-		for(int i=index; i<size;i++)
-		{
-		array[i]=array[i+1];
-		}
-		size--;
-		return res;
+		T resValue = array[index];
+		System.arraycopy(array, index+1, array, index, size-index-1);
+		size = size-1;
+		return resValue;
+//		T res = get(index);
+//		if(res == null && index == size-1) {
+//			array[index] = null;
+//			size--;
+//			return res;
+//		}
+//		for(int i=index; i<size;i++)
+//		{
+//		array[i]=array[i+1];
+//		}
+//		size--;
+//		return res;
 	}
 
 }
