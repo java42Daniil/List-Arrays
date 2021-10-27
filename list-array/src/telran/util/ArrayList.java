@@ -137,5 +137,5 @@ public class ArrayList<T> implements List<T> {
  			if (predicate.test(array[i]))remove(i);
 		return pSize >size;
 	}
-
+// V.R. Looks good.
 }
