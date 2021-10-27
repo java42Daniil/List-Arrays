@@ -143,6 +143,7 @@ public class ArrayList<T> implements List<T> {
  		for(int i=size-1; i>=0; i--) 
  			if (predicate.test(array[i]))remove(i);
 		return pSize >size;
+		
 	}
 
 }
