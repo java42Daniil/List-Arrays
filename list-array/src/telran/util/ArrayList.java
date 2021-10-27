@@ -1,6 +1,7 @@
 package telran.util;
 
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 public class ArrayList<T> implements List<T> {
 	private static final int DEFAULT_CAPACITY = 16;
@@ -30,18 +31,21 @@ public class ArrayList<T> implements List<T> {
 	}
 	@Override
 	public boolean add(int index, T element) {
-		if (index < 0 || index > size) {
-			return false;
-		}
-		if (size == array.length) {
+		boolean res = false;
+		if (index == size) {
 			add(element);
-			return true;
+			res = true;
+			
+		} else if(isValidIndex(index)) {
+			res = true;
+			if (size == array.length) {
+				allocate();
+			}
+			System.arraycopy(array, index, array, index + 1, size - index);
+			array[index] = element;
+			size++;
 		}
-	System.arraycopy(array, index, array, index+1, size-index);
-		size++;
-		array[index]=element;
-		
-		return true;
+		return res;
 	}
 
 	@Override
@@ -62,18 +66,76 @@ public class ArrayList<T> implements List<T> {
 	}
 	@Override
 	public T remove(int index) {
-		T res = get(index);
-		if(res == null && index == size-1) {
-			array[index] = null;
+		T res = null;
+		if (isValidIndex(index)) {
+			res = array[index];
 			size--;
-			return res;
+			System.arraycopy(array, index + 1, array, index, size - index);
+			//FIXME regarding setting null
 		}
-		for(int i=index; i<size;i++)
-		{
-		array[i]=array[i+1];
-		}
-		size--;
+		
 		return res;
+	}
+	@Override
+	public boolean contains(T pattern) {
+		boolean res = false;
+		for(int i = 0; i < size; i++) {
+			if (array[i].equals(pattern)) {
+				res = true;
+				break;
+			}
+		}
+		return res;
+	}
+	@Override
+	public int indexOf(T pattern) {
+		// TODO Auto-generated method stub
+		for ( int i=0; i<size; i++) 
+			if (array[i].equals(pattern)) 
+				return(i);
+		return (-1);
+	}
+	@Override
+	public int lastIndexOf(T pattern) {
+		// TODO Auto-generated method stub
+		for ( int i=size-1; i>=0; i--)
+			if (array[i].equals(pattern)) 
+				return(i);
+		return (-1);
+	}
+	@Override
+	public boolean contains(Predicate<T> predicate) {
+		boolean res = false;
+		for(int i = 0; i < size; i++) {
+			if (predicate.test(array[i])) {
+				res = true;
+				break;
+			}
+		}
+		return res;
+	}
+	@Override
+	public int indexOf(Predicate<T> predicate) {
+		// TODO Auto-generated method stub
+		for ( int i=0; i<size; i++) 
+			if (predicate.test(array[i])) return(i);
+		return (-1);
+	}
+	@Override
+	public int lastIndexOf(Predicate<T> predicate) {
+		// TODO Auto-generated method stub
+		for ( int i=size-1; i>=0; i--) 
+			if (predicate.test(array[i])) 
+				return(i);
+		return (-1);
+	}
+	@Override
+	public boolean removeIf(Predicate<T> predicate) {
+		// TODO Auto-generated method stub
+		int pSize=size;
+ 		for(int i=size-1; i>=0; i--) 
+ 			if (predicate.test(array[i]))remove(i);
+		return pSize >size;
 	}
 
 }
