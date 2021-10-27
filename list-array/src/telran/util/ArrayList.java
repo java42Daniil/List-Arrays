@@ -89,15 +89,19 @@ public class ArrayList<T> implements List<T> {
 	}
 	@Override
 	public int indexOf(T pattern) {
+		//[YG] after writing the code remove TODO. 
 		// TODO Auto-generated method stub
 		for ( int i=0; i<size; i++) 
 			if (array[i].equals(pattern)) 
+				//[YG] return is not method - parrentheses are unneeded
 				return(i);
 		return (-1);
 	}
 	@Override
 	public int lastIndexOf(T pattern) {
+		//[YG] after writing the code remove TODO. 
 		// TODO Auto-generated method stub
+		
 		for ( int i=size-1; i>=0; i--)
 			if (array[i].equals(pattern)) 
 				return(i);
@@ -116,21 +120,24 @@ public class ArrayList<T> implements List<T> {
 	}
 	@Override
 	public int indexOf(Predicate<T> predicate) {
+		//[YG] after writing the code remove TODO. 
 		// TODO Auto-generated method stub
 		for ( int i=0; i<size; i++) 
 			if (predicate.test(array[i])) return(i);
-		return (-1);
+		return (-1);//[YG] return is not method - parrentheses are unneeded
 	}
 	@Override
 	public int lastIndexOf(Predicate<T> predicate) {
+		//[YG] after writing the code remove TODO. 
 		// TODO Auto-generated method stub
 		for ( int i=size-1; i>=0; i--) 
 			if (predicate.test(array[i])) 
-				return(i);
+				return(i);//[YG] return is not method - parrentheses are unneeded
 		return (-1);
 	}
 	@Override
 	public boolean removeIf(Predicate<T> predicate) {
+		//[YG] after writing the code remove TODO. 
 		// TODO Auto-generated method stub
 		int pSize=size;
  		for(int i=size-1; i>=0; i--) 
