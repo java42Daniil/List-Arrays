@@ -78,6 +78,7 @@ public class ArrayList<T> implements List<T> {
 	}
 	@Override
 	public boolean contains(T pattern) {
+		// V.R. The implementation has to be in file List.java.
 		boolean res = false;
 		for(int i = 0; i < size; i++) {
 			if (array[i].equals(pattern)) {
@@ -90,6 +91,7 @@ public class ArrayList<T> implements List<T> {
 	@Override
 	public int indexOf(T pattern) {
 		// TODO Auto-generated method stub
+		// V.R. The implementation has to be in file List.java.
 		for ( int i=0; i<size; i++) 
 			if (array[i].equals(pattern)) 
 				return(i);
@@ -98,6 +100,7 @@ public class ArrayList<T> implements List<T> {
 	@Override
 	public int lastIndexOf(T pattern) {
 		// TODO Auto-generated method stub
+		// V.R. The implementation has to be in file List.java.
 		for ( int i=size-1; i>=0; i--)
 			if (array[i].equals(pattern)) 
 				return(i);
@@ -105,6 +108,7 @@ public class ArrayList<T> implements List<T> {
 	}
 	@Override
 	public boolean contains(Predicate<T> predicate) {
+		// V.R. The implementation has to be in file List.java.
 		boolean res = false;
 		for(int i = 0; i < size; i++) {
 			if (predicate.test(array[i])) {
